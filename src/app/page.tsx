@@ -42,22 +42,22 @@ export default function PomodoroTimer() {
       <main className="max-w-2xl mx-auto p-4">
         <div className="bg-[#c15c5c] rounded-lg p-5">
           <Tabs defaultValue="pomodoro" onValueChange={handleModeChange} className="w-full">
-            <TabsList className="w-full bg-[#ba4949]/30">
+            <TabsList className="w-full bg-[#c15c5c]">
               <TabsTrigger 
                 value="pomodoro" 
-                className="flex-1 data-[state=active]:bg-[#ba4949] text-white"
+                className="flex-1 data-[state=active]:bg-[#ba4949] text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
               >
                 Pomodoro
               </TabsTrigger>
               <TabsTrigger 
                 value="shortBreak" 
-                className="flex-1 data-[state=active]:bg-[#ba4949] text-white"
+                className="flex-1 data-[state=active]:bg-[#ba4949] text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
               >
                 Short Break
               </TabsTrigger>
               <TabsTrigger 
                 value="longBreak" 
-                className="flex-1 data-[state=active]:bg-[#ba4949] text-white"
+                className="flex-1 data-[state=active]:bg-[#ba4949] text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
               >
                 Long Break
               </TabsTrigger>
@@ -82,7 +82,7 @@ export default function PomodoroTimer() {
           <div className="text-sm">#1</div>
           <div className="text-lg">Time to focus!</div>
         </div>
-        
+
         <div className="mt-8">
           <div className="flex items-center justify-between text-white/90 mb-4">
             <h2 className="text-xl font-bold">Tasks</h2>
@@ -92,7 +92,7 @@ export default function PomodoroTimer() {
           </div>
           <Button 
             variant="outline" 
-            className="w-full border-white/20 border-dashed text-white hover:bg-white/10 hover:border-white/20"
+            className="w-full border-white/50 border-dashed text-white/50 font-bold bg-[#ba4949]/50 hover:bg-[#ba4949]/70 hover:border-white/70 hover:text-white/70"
           >
             <span className="text-lg mr-2">+</span> Add Task
           </Button>
