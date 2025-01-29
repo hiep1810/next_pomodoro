@@ -5,18 +5,20 @@ import { Settings, BarChart2, MoreVertical } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePomodoro } from '@/hooks/use-pomodoro'
+import {PomodoroMode ,bgClassMap } from '@/utils/theme'
 
 export default function PomodoroTimer() {
-  const [mode, setMode] = useState<'pomodoro' | 'shortBreak' | 'longBreak'>('pomodoro')
+  const [mode, setMode] = useState<PomodoroMode>('pomodoro')
+  const bgClass = bgClassMap[mode]
   const { time, isRunning, start, pause, reset } = usePomodoro()
 
   const handleModeChange = (value: string) => {
-    setMode(value as 'pomodoro' | 'shortBreak' | 'longBreak')
+    setMode(value as PomodoroMode)
     reset()
   }
 
   return (
-    <div className="min-h-screen bg-[#ba4949]">
+    <div className={`min-h-screen ${bgClass}`}>
       <header className="max-w-2xl mx-auto p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -40,24 +42,24 @@ export default function PomodoroTimer() {
       </header>
 
       <main className="max-w-2xl mx-auto p-4">
-        <div className="bg-[#c15c5c] rounded-lg p-5">
+        <div className="bg-[#ffffff]/10 rounded-lg p-5">
           <Tabs defaultValue="pomodoro" onValueChange={handleModeChange} className="w-full">
-            <TabsList className="w-full bg-[#c15c5c]">
+            <TabsList className={`w-full ${bgClass}`}>
               <TabsTrigger 
                 value="pomodoro" 
-                className="flex-1 data-[state=active]:bg-[#ba4949] text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
+                className="flex-1 data-[state=active]:bg-[#000000]/10 text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
               >
                 Pomodoro
               </TabsTrigger>
               <TabsTrigger 
                 value="shortBreak" 
-                className="flex-1 data-[state=active]:bg-[#ba4949] text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
+                className="flex-1 data-[state=active]:bg-[#000000]/10 text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
               >
                 Short Break
               </TabsTrigger>
               <TabsTrigger 
                 value="longBreak" 
-                className="flex-1 data-[state=active]:bg-[#ba4949] text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
+                className="flex-1 data-[state=active]:bg-[#000000]/10 text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
               >
                 Long Break
               </TabsTrigger>
@@ -70,7 +72,7 @@ export default function PomodoroTimer() {
               {String(time % 60).padStart(2, '0')}
             </div>
             <Button 
-              className="bg-white text-[#ba4949] hover:bg-white/90 px-12 py-6 text-xl font-bold mt-5"
+              className={`bg-white text-[#ba4949] hover:bg-white/90 px-12 py-6 text-xl font-bold mt-5`}
               onClick={isRunning ? pause : start}
             >
               {isRunning ? 'PAUSE' : 'START'}
@@ -92,7 +94,7 @@ export default function PomodoroTimer() {
           </div>
           <Button 
             variant="outline" 
-            className="w-full border-white/50 border-dashed text-white/50 font-bold bg-[#ba4949]/50 hover:bg-[#ba4949]/70 hover:border-white/70 hover:text-white/70"
+            className={`w-full border-white/50 border-dashed text-white/50 font-bold ${bgClass}/50 hover:${bgClass}/70 hover:border-white/70 hover:text-white/70`}
           >
             <span className="text-lg mr-2">+</span> Add Task
           </Button>
