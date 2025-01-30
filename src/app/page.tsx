@@ -103,12 +103,14 @@ export default function PomodoroTimer() {
               {String(Math.floor(time / 60)).padStart(2, '0')}:
               {String(time % 60).padStart(2, '0')}
             </div>
-            <Button 
+            <Button
               className={`bg-white ${theme.text} hover:bg-white/90 px-12 py-6 text-xl font-bold mt-5
-                border-t-0 border-x-0 border-b-4
-                active:translate-y-[2px] active:border-b-0 
-                transition-all duration-75
-              `}
+                  relative
+                  shadow-[0_8px_#cccccc]
+                  transform-gpu active:translate-y-[5px]
+                  active:shadow-[0_3px_#cccccc]
+                  transition-all duration-75
+                `}
               onClick={isRunning ? pause : start}
             >
               {isRunning ? 'PAUSE' : 'START'}
