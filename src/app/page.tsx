@@ -26,17 +26,20 @@ export default function PomodoroTimer() {
             <span className="text-white font-bold text-2xl">Pomofocus</span>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" className="text-white hover:bg-white/10">
+            <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
               <BarChart2 className="w-5 h-5" />
-              <span className="ml-2">Report</span>
+              <span className="ml-2 hidden sm:inline">Report</span>
             </Button>
-            <Button variant="ghost" className="text-white hover:bg-white/10">
+            <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
               <Settings className="w-5 h-5" />
-              <span className="ml-2">Setting</span>
+              <span className="ml-2 hidden sm:inline">Setting</span>
             </Button>
-            <Button variant="ghost" className="text-white hover:bg-white/10">
+            <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
               <User className="w-5 h-5" />
-              <span>Sign In</span>
+              <span className="ml-2 hidden sm:inline">Sign In</span>
+            </Button>
+            <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
+              <MoreVertical className="w-5 h-5" />
             </Button>
           </div>
         </div>
