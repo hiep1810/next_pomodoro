@@ -1,11 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { Settings, BarChart2, MoreVertical, User } from 'lucide-react'
+import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePomodoro } from '@/hooks/use-pomodoro'
 import {PomodoroMode ,themeMap } from '@/utils/theme'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export default function PomodoroTimer() {
   const [mode, setMode] = useState<PomodoroMode>('pomodoro')
@@ -38,9 +44,31 @@ export default function PomodoroTimer() {
               <User className="w-5 h-5" />
               <span className="ml-2 hidden sm:inline">Sign In</span>
             </Button>
-            <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
-              <MoreVertical className="w-5 h-5" />
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
+                  <MoreVertical className="w-5 h-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                className="w-40" 
+                align="end" 
+                sideOffset={5}
+              >
+                <DropdownMenuItem className="cursor-pointer hover:bg-black/10">
+                  <LogIn className="w-4 h-4 mr-2" />
+                  <span>Login</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer hover:bg-black/10">
+                  <Star className="w-4 h-4 mr-2" />
+                  <span>Premium</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer hover:bg-black/10">
+                  <Keyboard className="w-4 h-4 mr-2" />
+                  <span>Shortcuts</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
