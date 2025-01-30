@@ -1,15 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { Settings, BarChart2, MoreVertical } from 'lucide-react'
+import { Settings, BarChart2, MoreVertical, User } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePomodoro } from '@/hooks/use-pomodoro'
-import {PomodoroMode ,bgClassMap } from '@/utils/theme'
+import {PomodoroMode ,themeMap } from '@/utils/theme'
 
 export default function PomodoroTimer() {
   const [mode, setMode] = useState<PomodoroMode>('pomodoro')
-  const bgClass = bgClassMap[mode]
+  const theme = themeMap[mode]
   const { time, isRunning, start, pause, reset } = usePomodoro()
 
   const handleModeChange = (value: string) => {
@@ -18,7 +18,7 @@ export default function PomodoroTimer() {
   }
 
   return (
-    <div className={`min-h-screen ${bgClass}`}>
+    <div className={`min-h-screen ${theme.bg}`}>
       <header className="max-w-2xl mx-auto p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -35,6 +35,7 @@ export default function PomodoroTimer() {
               <span className="ml-2">Setting</span>
             </Button>
             <Button variant="ghost" className="text-white hover:bg-white/10">
+              <User className="w-5 h-5" />
               <span>Sign In</span>
             </Button>
           </div>
@@ -44,7 +45,7 @@ export default function PomodoroTimer() {
       <main className="max-w-2xl mx-auto p-4">
         <div className="bg-[#ffffff]/10 rounded-lg p-5">
           <Tabs defaultValue="pomodoro" onValueChange={handleModeChange} className="w-full">
-            <TabsList className={`w-full ${bgClass}`}>
+            <TabsList className={`w-full ${theme.bg}`}>
               <TabsTrigger 
                 value="pomodoro" 
                 className="flex-1 data-[state=active]:bg-[#000000]/10 text-white data-[state=active]:text-white data-[state=active]:shadow data-[state=active]:font-bold"
@@ -72,7 +73,11 @@ export default function PomodoroTimer() {
               {String(time % 60).padStart(2, '0')}
             </div>
             <Button 
-              className={`bg-white text-[#ba4949] hover:bg-white/90 px-12 py-6 text-xl font-bold mt-5`}
+              className={`bg-white ${theme.text} hover:bg-white/90 px-12 py-6 text-xl font-bold mt-5
+                border-t-0 border-x-0 border-b-4
+                active:translate-y-[2px] active:border-b-0 
+                transition-all duration-75
+              `}
               onClick={isRunning ? pause : start}
             >
               {isRunning ? 'PAUSE' : 'START'}
@@ -94,7 +99,7 @@ export default function PomodoroTimer() {
           </div>
           <Button 
             variant="outline" 
-            className={`w-full border-white/50 border-dashed text-white/50 font-bold ${bgClass}/50 hover:${bgClass}/70 hover:border-white/70 hover:text-white/70`}
+            className={`w-full border-white/50 border-dashed text-white/50 font-bold ${theme.bg}/50 hover:${theme.bg}/70 hover:border-white/70 hover:text-white/70`}
           >
             <span className="text-lg mr-2">+</span> Add Task
           </Button>
