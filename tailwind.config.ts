@@ -56,7 +56,24 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+  		keyframes: {
+  			expandVertical: {
+  				'0%': { 
+  					height: '80%',
+  					opacity: '0.8',
+  					transform: 'scaleY(0.8)'
+  				},
+  				'100%': { 
+  					height: 'var(--animate-height)',
+  					opacity: '1',
+  					transform: 'scaleY(1)'
+  				},
+  			},
+  		},
+  		animation: {
+  			expandVertical: 'expandVertical 0.2s ease-out forwards',
+  		},
   	}
   },
   plugins: [require("tailwindcss-animate")],

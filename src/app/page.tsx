@@ -12,15 +12,30 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { TaskForm } from '@/components/task-form'
+import { TaskItem } from '@/components/task-item'
+
+interface Task {
+  title: string
+  estimatedPomodoros: number
+  completedPomodoros: number
+}
 
 export default function PomodoroTimer() {
   const [mode, setMode] = useState<PomodoroMode>('pomodoro')
   const theme = themeMap[mode]
   const { time, isRunning, start, pause, reset } = usePomodoro()
+  const [showTaskForm, setShowTaskForm] = useState(false)
+  const [tasks, setTasks] = useState<Task[]>([])
 
   const handleModeChange = (value: string) => {
     setMode(value as PomodoroMode)
     reset()
+  }
+
+  const handleAddTask = (task: Task) => {
+    setTasks([...tasks, task])
+    console.log(tasks)
   }
 
   return (
@@ -47,7 +62,7 @@ export default function PomodoroTimer() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
-                  <MoreVertical className="w-5 h-5" />
+                  <MoreVertical className="w-5 h-5 stroke-[3.5]" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent 
@@ -127,18 +142,37 @@ export default function PomodoroTimer() {
           <div className="flex items-center justify-between text-white/90 mb-4">
             <h2 className="text-xl font-bold">Tasks</h2>
             <Button variant="ghost" size="icon" className="text-white/90 hover:bg-white/10">
-              <MoreVertical className="w-5 h-5" />
+              <MoreVertical className="w-5 h-5 stroke-[3.5]" />
             </Button>
           </div>
+          {tasks.length > 0 && (
+            <div className="space-y-2 mb-4">
+              {tasks.map((task, index) => (
+                <TaskItem
+                  key={index}
+                  title={task.title}
+                  number={task.completedPomodoros || 0}
+                  total={task.estimatedPomodoros}
+                />
+              ))}
+            </div>
+          )}
+          {showTaskForm && (
+            <TaskForm
+              onClose={() => setShowTaskForm(false)}
+              onSubmit={handleAddTask}
+            />
+          )}
           <Button 
             variant="outline" 
+            onClick={() => setShowTaskForm(true)}
             className={`w-full border-white/50 border-dashed text-white/50 font-bold ${theme.bg}/50 hover:${theme.bg}/70 hover:border-white/70 hover:text-white/70`}
           >
             <span className="text-lg mr-2">+</span> Add Task
           </Button>
+
+ 
         </div>
-
-
       </main>
     </div>
   )
