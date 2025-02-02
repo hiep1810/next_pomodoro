@@ -72,15 +72,15 @@ export default function PomodoroTimer() {
                 align="end" 
                 sideOffset={5}
               >
-                <DropdownMenuItem className="cursor-pointer hover:bg-black/10">
+                <DropdownMenuItem className="cursor-pointer">
                   <LogIn className="w-4 h-4 mr-2" />
                   <span>Login</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer hover:bg-black/10">
+                <DropdownMenuItem className="cursor-pointer">
                   <Star className="w-4 h-4 mr-2" />
                   <span>Premium</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer hover:bg-black/10">
+                <DropdownMenuItem className="cursor-pointer">
                   <Keyboard className="w-4 h-4 mr-2" />
                   <span>Shortcuts</span>
                 </DropdownMenuItem>
