@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
@@ -36,6 +35,7 @@ export function TaskForm({ onClose, onSubmit }: TaskFormProps) {
     
     setTitle('')
     setEstimatedPomodoros(1)
+    setCompletedPomodoros(0)
     onClose()
   }
 
