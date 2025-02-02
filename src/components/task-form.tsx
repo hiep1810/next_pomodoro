@@ -63,7 +63,7 @@ export function TaskForm({ onClose, onSubmit }: TaskFormProps) {
                   value={estimatedPomodoros}
                   min={1}
                   onChange={(e) => setEstimatedPomodoros(Number(e.target.value))}
-                  className="w-16" 
+                  className="w-16 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
                 />
                 <div className="flex flex-col">
                   <Button
