@@ -29,7 +29,7 @@ export function TaskItem({ title, number, total }: TaskItemProps) {
               <Check className="h-4 w-4 text-white stroke-[3.5]" />
             </div>
           </button>
-          <span className="text-sm font-medium">{title}</span>
+          <span className={`text-sm text-gray-500 font-bold ${isChecked ? "line-through" : ""}`}>{title}</span>
         </div>
 
         <div className="flex items-center gap-2">
