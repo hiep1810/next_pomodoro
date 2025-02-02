@@ -49,21 +49,21 @@ export default function PomodoroTimer() {
             <span className="text-white font-bold text-2xl">Pomofocus</span>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
+            <Button variant="ghost" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}>
               <BarChart2 className="w-5 h-5" />
               <span className="ml-2 hidden sm:inline">Report</span>
             </Button>
-            <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
+            <Button variant="ghost" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}>
               <Settings className="w-5 h-5" />
               <span className="ml-2 hidden sm:inline">Setting</span>
             </Button>
-            <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
+            <Button variant="ghost" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}>
               <User className="w-5 h-5" />
               <span className="ml-2 hidden sm:inline">Sign In</span>
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="text-white bg-[#ffffff]/10 hover:opacity-80">
+                <Button variant="ghost" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}>
                   <MoreVertical className="w-5 h-5 stroke-[3.5]" />
                 </Button>
               </DropdownMenuTrigger>
@@ -143,9 +143,11 @@ export default function PomodoroTimer() {
         <div className="mt-8">
           <div className="flex items-center justify-between text-white/90 mb-4">
             <h2 className="text-xl font-bold">Tasks</h2>
-            <Button variant="ghost" size="icon" className="text-white/90 hover:bg-white/10">
-              <MoreVertical className="w-5 h-5 stroke-[3.5]" />
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}>
+                  <MoreVertical className="w-5 h-5 stroke-[3.5]" />
+                </Button>
           </div>
           {tasks.length > 0 && (
             <div className="space-y-2 mb-4">
