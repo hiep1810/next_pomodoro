@@ -65,12 +65,21 @@ export function TaskForm({ onClose, onSubmit }: TaskFormProps) {
                   onChange={(e) => setEstimatedPomodoros(Number(e.target.value))}
                   className="w-16 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" 
                 />
-                <div className="flex flex-col">
+                <div className="flex flex-row gap-1">
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="h-4 w-6"
+                    className='
+                      relative
+                      shadow-[0_2px_#cccccc]
+                      transform-gpu active:translate-y-[1px]
+                      active:shadow-[0_1px_#cccccc]
+                      transition-all duration-75
+                    '
+                    style={{
+                      border: '1px solid #cccccc'
+                    }}
                     onClick={() => setEstimatedPomodoros(prev => prev + 1)}
                   >
                     <span className="text-xs">▲</span>
@@ -79,7 +88,16 @@ export function TaskForm({ onClose, onSubmit }: TaskFormProps) {
                     type="button"
                     variant="ghost" 
                     size="icon"
-                    className="h-4 w-6"
+                    className='
+                      relative
+                      shadow-[0_2px_#cccccc]
+                      transform-gpu active:translate-y-[1px]
+                      active:shadow-[0_1px_#cccccc]
+                      transition-all duration-75
+                    '
+                    style={{
+                      border: '1px solid #cccccc'
+                    }}
                     onClick={() => setEstimatedPomodoros(prev => Math.max(1, prev - 1))}
                   >
                     <span className="text-xs">▼</span>
