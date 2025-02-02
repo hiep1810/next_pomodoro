@@ -43,7 +43,9 @@ export default function PomodoroTimer() {
       <header className="max-w-2xl mx-auto p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-white rounded-full" />
+            <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center" >
+              <Check className={`h-4 w-4 stroke-[5] ${theme.text}`} />
+            </div>
             <span className="text-white font-bold text-2xl">Pomofocus</span>
           </div>
           <div className="flex items-center gap-2">
