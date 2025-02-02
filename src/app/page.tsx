@@ -174,8 +174,23 @@ export default function PomodoroTimer() {
           >
             <span className="text-lg mr-2">+</span> Add Task
           </Button>
-
- 
+        </div>
+        <div className="mt-8">
+          <div className="text-white/90 bg-white/10 p-6 border-t-2 border-white">
+            <div className="flex justify-between items-center">
+              <div>
+                <span>Pomos: </span>
+                <span className="text-xl font-bold">3.6</span>
+                <span className="text-xlfont-bold">/</span>
+                <span className="text-xl font-bold">3.6</span>
+              </div>
+              <div>
+                <span>Finish At: </span>
+                <span className="text-xl font-bold">13:35</span>
+                <span> (0h)</span>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
