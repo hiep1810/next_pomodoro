@@ -36,6 +36,7 @@ export function TaskForm({ onClose, onSubmit }: TaskFormProps) {
     
     setTitle('')
     setEstimatedPomodoros(1)
+    setCompletedPomodoros(0)
     onClose()
   }
 
