@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard } from 'lucide-react'
+import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard, Check, Trash2, Eye, List, Lock, FileText } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePomodoro } from '@/hooks/use-pomodoro'
-import {PomodoroMode ,themeMap } from '@/utils/theme'
+import { PomodoroMode, themeMap } from '@/utils/theme'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -148,6 +148,40 @@ export default function PomodoroTimer() {
                 <Button variant="ghost" size="icon" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}>
                   <MoreVertical className="w-5 h-5 stroke-[3.5]" />
                 </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-60"
+                align="end"
+                sideOffset={5}
+              >
+                <DropdownMenuItem className="cursor-pointer">
+                  <Trash2 className="h-4 w-4" />
+                  Clear finished tasks
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  <FileText className="h-4 w-4" />
+                  Use Template
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-not-allowed text-gray-400">
+                  <List className="h-4 w-4" />
+                  Import from Todoist
+                  <Lock className="h-3 w-3 ml-auto" />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  <Check className="h-4 w-4" />
+                  Clear act pomodoros
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-not-allowed text-gray-400">
+                  <Eye className="h-4 w-4" />
+                  Hide tasks
+                  <Lock className="h-3 w-3 ml-auto" />
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  <Trash2 className="h-4 w-4" />
+                  Clear all tasks
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           {tasks.length > 0 && (
             <div className="space-y-2 mb-4">
