@@ -168,7 +168,7 @@ export default function PomodoroTimer() {
           <Button 
             variant="outline" 
             onClick={() => setShowTaskForm(true)}
-            className={`w-full border-white/50 border-dashed text-white/50 font-bold ${theme.bg}/50 hover:${theme.bg}/70 hover:border-white/70 hover:text-white/70`}
+            className={`w-full border-white/50 border-dashed text-white/50 font-bold h-16 ${theme.bg}/50 hover:${theme.bg}/70 hover:border-white/70 hover:text-white/70`}
           >
             <span className="text-lg mr-2">+</span> Add Task
           </Button>
