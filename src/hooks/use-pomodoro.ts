@@ -36,6 +36,6 @@ export function usePomodoro(initialTime: number = 25 * 60) {
     setIsRunning(false)
   }, [initialTime])
 
-  return { time, isRunning, start, pause, reset }
+  return { time, setTime, isRunning, start, pause, reset }
 }
 

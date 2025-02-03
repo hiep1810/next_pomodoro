@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard, Check, Trash2, Eye, List, Lock, FileText } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -14,28 +14,61 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { TaskForm } from '@/components/task-form'
 import { TaskItem } from '@/components/task-item'
-
-interface Task {
-  title: string
-  estimatedPomodoros: number
-  completedPomodoros: number
-}
+import { Task } from '@/models/Task'
+import { TaskListHandler } from '@/utils/TaskListHandler'
 
 export default function PomodoroTimer() {
   const [mode, setMode] = useState<PomodoroMode>('pomodoro')
   const theme = themeMap[mode]
-  const { time, isRunning, start, pause, reset } = usePomodoro()
+  const { time, setTime, isRunning, start, pause, reset } = usePomodoro()
   const [showTaskForm, setShowTaskForm] = useState(false)
   const [tasks, setTasks] = useState<Task[]>([])
+  const [estimatedPomos, setEstimatedPomos] = useState(0)
+  const [completedPomos, setCompletedPomos] = useState(0)
+
+  useEffect(() => {
+    const taskList = new TaskListHandler(tasks)
+    const estimatedPomos = taskList.getEstimatedPomodorosCount()
+    const completedPomos = taskList.getCompletedPomodorosCount()
+    setEstimatedPomos(estimatedPomos)
+    setCompletedPomos(completedPomos)
+  }, [tasks])
 
   const handleModeChange = (value: string) => {
     setMode(value as PomodoroMode)
     reset()
+    if (value === 'pomodoro') {
+      setTime(25 * 60)
+    } else if (value === 'shortBreak') {
+      setTime(5 * 60)
+    } else if (value === 'longBreak') {
+      setTime(15 * 60)
+    }
   }
 
-  const handleAddTask = (task: Task) => {
+  const handleAddTask = (title: string, estimatedPomodoros: number) => {
+    const task = new Task(title, estimatedPomodoros, 0, false)
     setTasks([...tasks, task])
-    console.log(tasks)
+  }
+
+  const handleCheckTask = (id: string) => {
+    const task = tasks.find(task => task.id === id)
+    if (task) {
+      task.checked = !task.checked
+      setTasks([...tasks])
+    }
+  }
+
+  const calculateFinishAt = () => {
+    const taskList = new TaskListHandler(tasks)
+    const finishAt = taskList.getFinishAt()
+    return finishAt
+  }
+
+  const calculateRemainingTime = () => {
+    const taskList = new TaskListHandler(tasks)
+    const remainingTime = taskList.getRemainingTime()
+    return remainingTime
   }
 
   return (
@@ -185,12 +218,15 @@ export default function PomodoroTimer() {
           </div>
           {tasks.length > 0 && (
             <div className="space-y-2 mb-4">
-              {tasks.map((task, index) => (
+              {tasks.map((task) => (
                 <TaskItem
-                  key={index}
+                  key={task.id}
+                  id={task.id}
+                  checked={task.checked}
                   title={task.title}
-                  number={task.completedPomodoros || 0}
+                  number={task.completedPomodoros}
                   total={task.estimatedPomodoros}
+                  onCheck={handleCheckTask}
                 />
               ))}
             </div>
@@ -214,14 +250,15 @@ export default function PomodoroTimer() {
             <div className="flex justify-between items-center">
               <div>
                 <span>Pomos: </span>
-                <span className="text-xl font-bold">3.6</span>
+                <span className="text-xl font-bold">{completedPomos}</span>
                 <span className="text-xlfont-bold">/</span>
-                <span className="text-xl font-bold">3.6</span>
+                <span className="text-xl font-bold">{estimatedPomos}</span>
               </div>
               <div>
                 <span>Finish At: </span>
-                <span className="text-xl font-bold">13:35</span>
-                <span> (0h)</span>
+
+                <span className="text-xl font-bold">{calculateFinishAt()}</span>
+                <span> ({calculateRemainingTime()}h)</span>
               </div>
             </div>
           </div>

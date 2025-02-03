@@ -7,35 +7,24 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Lock } from 'lucide-react'
 
-interface Task {
-  title: string
-  estimatedPomodoros: number
-  completedPomodoros: number
-}
-
-interface TaskFormProps {
+export interface TaskFormProps {
   onClose: () => void
-  onSubmit: (task: Task) => void
+  onSubmit: (title: string, estimatedPomodoros: number) => void
 }
-
 export function TaskForm({ onClose, onSubmit }: TaskFormProps) {
   const [title, setTitle] = useState('')
   const [estimatedPomodoros, setEstimatedPomodoros] = useState(1)
-  const [completedPomodoros, setCompletedPomodoros] = useState(0)
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!title.trim()) return
     
-    onSubmit({
+    onSubmit(
       title,
-      estimatedPomodoros,
-      completedPomodoros
-    })
+      estimatedPomodoros
+    )
     
     setTitle('')
-    setEstimatedPomodoros(1)
-    setCompletedPomodoros(0)
     onClose()
   }
 

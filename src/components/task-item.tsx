@@ -9,27 +9,32 @@ interface TaskItemProps {
   title: string
   number: number
   total: number
+  onCheck: (id: string) => void
+  id : string
+  checked: boolean
 }
 
-export function TaskItem({ title, number, total }: TaskItemProps) {
-  const [isChecked, setIsChecked] = useState(false)
+export function TaskItem({ id, title, checked, number, total, onCheck }: TaskItemProps) {
+  const handleCheck = () => {
+    onCheck(id)
+  }
 
   return (
     <Card className="w-full rounded-md">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
           <button
-            onClick={() => setIsChecked(!isChecked)}
+            onClick={handleCheck}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
             <div
-              className={`flex h-6 w-6 items-center justify-center rounded-full transition-colors ${isChecked ? "bg-orange-500" : "bg-gray-200"
+              className={`flex h-6 w-6 items-center justify-center rounded-full transition-colors ${checked ? "bg-orange-500" : "bg-gray-200"
                 }`}
             >
               <Check className="h-4 w-4 text-white stroke-[3.5]" />
             </div>
           </button>
-          <span className={`text-sm text-gray-500 font-bold ${isChecked ? "line-through" : ""}`}>{title}</span>
+          <span className={`text-sm text-gray-500 font-bold ${checked ? "line-through" : ""}`}>{title}</span>
         </div>
 
         <div className="flex items-center gap-2">
