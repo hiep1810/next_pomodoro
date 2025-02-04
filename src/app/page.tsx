@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard, Check, Trash2, Eye, List, Lock, FileText } from 'lucide-react'
+import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard, Check, Trash2, Eye, List, Lock, FileText, SkipForward } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePomodoro } from '@/hooks/use-pomodoro'
@@ -153,18 +153,30 @@ export default function PomodoroTimer() {
               {String(Math.floor(time / 60)).padStart(2, '0')}:
               {String(time % 60).padStart(2, '0')}
             </div>
-            <Button
-              className={`bg-white ${theme.text} hover:bg-white/90 px-12 py-6 text-xl font-bold mt-5
-                  relative
-                  shadow-[0_8px_#cccccc]
-                  transform-gpu active:translate-y-[5px]
-                  active:shadow-[0_3px_#cccccc]
-                  transition-all duration-75
-                `}
-              onClick={isRunning ? pause : start}
-            >
-              {isRunning ? 'PAUSE' : 'START'}
-            </Button>
+            <div className="flex items-center justify-center">
+              <Button
+                className={`bg-white ${theme.text} hover:bg-white/90 px-12 py-6 text-xl font-bold mt-5
+                    relative
+                    shadow-[0_8px_#cccccc]
+                    transform-gpu active:translate-y-[5px]
+                    active:shadow-[0_3px_#cccccc]
+                    transition-all duration-75
+                  `}
+                onClick={isRunning ? pause : start}
+              >
+                {isRunning ? 'PAUSE' : 'START'}
+              </Button>
+              <Button
+                className={`hover:bg-white/10 ml-4 p-6 mt-5 text-white
+                    relative
+                    transform-gpu active:translate-y-[2px]
+                    transition-all duration-75
+                  `}
+                variant="ghost"
+              >
+                <SkipForward className="w-6 h-6" />
+              </Button>
+            </div>
           </div>
         </div>
 
