@@ -39,7 +39,11 @@ export class TaskListHandler {
         const remainingTime = remainingPomos * 25
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
         const finishAt = new Date(Date.now() + remainingTime * 60 * 1000)
-        return finishAt.toLocaleString('en-US', { timeZone: timezone }).slice(10, 15)
+        return finishAt.toLocaleString('en-US', {
+            timeZone: timezone, hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        })
     }
 
     public getRemainingTime(): number {
