@@ -3,24 +3,32 @@
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Check, MoreVertical } from 'lucide-react'
-import { useState } from 'react'
 
 interface TaskItemProps {
   title: string
   number: number
   total: number
-  onCheck: (id: string) => void
   id : string
   checked: boolean
+  selected: boolean
+  onCheck: (id: string) => void
+  onSelected: (id: string) => void
 }
 
-export function TaskItem({ id, title, checked, number, total, onCheck }: TaskItemProps) {
+export function TaskItem({ id, title, selected, checked, number, total, onCheck, onSelected }: TaskItemProps) {
+  
   const handleCheck = () => {
     onCheck(id)
   }
 
+  const handleSelect = () =>{
+    onSelected(id)
+  }
+
   return (
-    <Card className="w-full rounded-md">
+    <Card className={`w-full rounded-md border-0
+      ${selected ? "border-l-8 border-blue-500" : "" }`}
+    onClick={handleSelect}>
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
           <button

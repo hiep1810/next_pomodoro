@@ -36,6 +36,7 @@ export default function PomodoroTimer() {
   
   const [showTaskForm, setShowTaskForm] = useState(false)
   const [tasks, setTasks] = useState<Task[]>([])
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null)
   const [estimatedPomos, setEstimatedPomos] = useState(0)
   const [completedPomos, setCompletedPomos] = useState(0)
 
@@ -69,6 +70,13 @@ export default function PomodoroTimer() {
     if (task) {
       task.checked = !task.checked
       setTasks([...tasks])
+    }
+  }
+
+  const handleSelectTask = (id: string) =>{
+    const task = tasks.find(task => task.id === id)
+    if (task) {
+      setSelectedTaskId(task.id)
     }
   }
 
@@ -247,11 +255,13 @@ export default function PomodoroTimer() {
                 <TaskItem
                   key={task.id}
                   id={task.id}
+                  selected={selectedTaskId == task.id ? true: false}
                   checked={task.checked}
                   title={task.title}
                   number={task.completedPomodoros}
                   total={task.estimatedPomodoros}
                   onCheck={handleCheckTask}
+                  onSelected={handleSelectTask}
                 />
               ))}
             </div>
