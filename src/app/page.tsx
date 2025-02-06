@@ -20,7 +20,20 @@ import { TaskListHandler } from '@/utils/TaskListHandler'
 export default function PomodoroTimer() {
   const [mode, setMode] = useState<PomodoroMode>('pomodoro')
   const theme = themeMap[mode]
-  const { time, setTime, isRunning, start, pause, reset } = usePomodoro()
+
+  const onTimeEnd = () => {
+    let _selectedTask = tasks.find(task => task.id === selectedTaskId)
+    if(_selectedTask){
+      _selectedTask.completedPomodoros += 1
+      setTasks([...tasks])
+    }
+  }
+
+  const { time, setTime, isRunning, start, pause, reset } = usePomodoro({
+    initialTime: 1500, // 25 minutes
+    onTimeEnd: onTimeEnd,
+  })  
+  
   const [showTaskForm, setShowTaskForm] = useState(false)
   const [tasks, setTasks] = useState<Task[]>([])
   const [estimatedPomos, setEstimatedPomos] = useState(0)
