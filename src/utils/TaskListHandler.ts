@@ -36,10 +36,18 @@ export class TaskListHandler {
 
     public getFinishAt(): string {
         const remainingPomos = this.getEstimatedPomodorosCount() - this.getCompletedPomodorosCount()
-        const remainingTime = remainingPomos * 25
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
-        const finishAt = new Date(Date.now() + remainingTime * 60 * 1000)
-        return finishAt.toLocaleString('en-US', {
+        
+        if (remainingPomos > 0){
+            const remainingTime = remainingPomos * 25
+            const finishAt = new Date(Date.now() + remainingTime * 60 * 1000)
+            return finishAt.toLocaleString('en-US', {
+                timeZone: timezone, hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            })
+        }
+        return new Date(Date.now()).toLocaleString('en-US', {
             timeZone: timezone, hour: '2-digit',
             minute: '2-digit',
             hour12: false
@@ -49,6 +57,6 @@ export class TaskListHandler {
     public getRemainingTime(): number {
         const remainingPomos = this.getEstimatedPomodorosCount() - this.getCompletedPomodorosCount()
         const remainingTime = Number((remainingPomos * 25 / 60).toFixed(1))
-        return remainingTime
+        return remainingTime > 0 ? remainingTime : 0
     }
 }
