@@ -7,12 +7,12 @@ export class Task {
     estimatedPomodoros: number;
     completedPomodoros: number;
 
-    constructor(title: string, estimatedPomodoros: number, completedPomodoros: number, checked: boolean) {
+    constructor(title: string, checked: boolean, estimatedPomodoros: number, completedPomodoros: number) {
         this.id = uuidv4()
         this.title = title
+        this.checked = checked
         this.estimatedPomodoros = estimatedPomodoros
         this.completedPomodoros = completedPomodoros
-        this.checked = checked
     }
 }
 
