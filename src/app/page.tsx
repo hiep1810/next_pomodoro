@@ -80,6 +80,22 @@ export default function PomodoroTimer() {
     }
   }
 
+  const handleSkipForward = () =>{
+    let nextMode = '';
+
+    if (mode == 'pomodoro'){
+      nextMode = 'shortBreak'
+    }
+    else if (mode == 'shortBreak'){
+      nextMode = 'pomodoro'
+    }
+    else if (mode == 'longBreak'){
+      nextMode = 'pomodoro'
+    }
+    onTimeEnd()
+    handleModeChange(nextMode)
+  }
+
   const calculateFinishAt = () => {
     const taskList = new TaskListHandler(tasks)
     const finishAt = taskList.getFinishAt()
@@ -176,7 +192,7 @@ export default function PomodoroTimer() {
             </div>
             <div className="flex items-center justify-center">
               <Button
-                className={`bg-white ${theme.text} hover:bg-white/90 px-12 py-6 text-xl font-bold mt-5
+                className={`bg-white ${theme.text} hover:bg-white/90 px-12 py-6 text-xl font-bold
                     relative
                     shadow-[0_8px_#cccccc]
                     transform-gpu active:translate-y-[5px]
@@ -188,11 +204,10 @@ export default function PomodoroTimer() {
                 {isRunning ? 'PAUSE' : 'START'}
               </Button>
               <Button
-                className={`hover:bg-white/10 ml-4 p-6 mt-5 text-white
-                    relative
-                    transform-gpu active:translate-y-[2px]
-                    transition-all duration-75
+                className={`hover:bg-white/10 ml-60 text-white hover:text-white
+                    absolute
                   `}
+                  onClick={handleSkipForward}
                 variant="ghost"
               >
                 <SkipForward className="w-6 h-6" />
