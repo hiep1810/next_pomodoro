@@ -22,10 +22,13 @@ export default function PomodoroTimer() {
   const theme = themeMap[mode]
 
   const onTimeEnd = () => {
-    let _selectedTask = tasks.find(task => task.id === selectedTaskId)
-    if(_selectedTask){
-      _selectedTask.completedPomodoros += 1
-      setTasks([...tasks])
+    let selectedTask = tasks.find(task => task.id === selectedTaskId)
+    if(mode === 'pomodoro'){
+      setCompletedPomosCount(completedPomosCount + 1)
+      if(selectedTask){
+        selectedTask.completedPomodoros += 1
+        setTasks([...tasks])
+      }
     }
   }
 
@@ -39,6 +42,7 @@ export default function PomodoroTimer() {
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null)
   const [estimatedPomos, setEstimatedPomos] = useState(0)
   const [completedPomos, setCompletedPomos] = useState(0)
+  const [completedPomosCount, setCompletedPomosCount] = useState(0)
 
   useEffect(() => {
     const taskList = new TaskListHandler(tasks)
@@ -47,6 +51,7 @@ export default function PomodoroTimer() {
     setEstimatedPomos(estimatedPomos)
     setCompletedPomos(completedPomos)
   }, [tasks])
+
 
   const handleModeChange = (value: string) => {
     setMode(value as PomodoroMode)
@@ -82,9 +87,14 @@ export default function PomodoroTimer() {
 
   const handleSkipForward = () =>{
     let nextMode = '';
-
     if (mode == 'pomodoro'){
-      nextMode = 'shortBreak'
+      setCompletedPomosCount(completedPomosCount + 1)
+      if(completedPomosCount % 4 === 0 && completedPomosCount != 0){
+        nextMode = 'longBreak'
+      }
+      else{
+        nextMode = 'shortBreak'
+      }
     }
     else if (mode == 'shortBreak'){
       nextMode = 'pomodoro'
