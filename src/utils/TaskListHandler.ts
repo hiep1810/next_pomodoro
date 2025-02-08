@@ -35,11 +35,19 @@ export class TaskListHandler {
 
 
     public getFinishAt(): string {
-        const remainingPomos = this.getEstimatedPomodorosCount() - this.getCompletedPomodorosCount()
+        let estimatedPomodoros = this.getEstimatedPomodorosCount()
+        let completedPomodoros = this.getCompletedPomodorosCount()
+        
+        for(let i = 0; i < this.tasks.length; i++){
+            if(this.tasks[i].checked){
+                completedPomodoros -= this.tasks[i].completedPomodoros
+            }
+        }
+        const remainingPomodoros = estimatedPomodoros - completedPomodoros
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
         
-        if (remainingPomos > 0){
-            const remainingTime = remainingPomos * 25
+        if (remainingPomodoros > 0){
+            const remainingTime = remainingPomodoros * 25
             const finishAt = new Date(Date.now() + remainingTime * 60 * 1000)
             return finishAt.toLocaleString('en-US', {
                 timeZone: timezone, hour: '2-digit',
@@ -55,8 +63,16 @@ export class TaskListHandler {
     }
 
     public getRemainingTime(): number {
-        const remainingPomos = this.getEstimatedPomodorosCount() - this.getCompletedPomodorosCount()
-        const remainingTime = Number((remainingPomos * 25 / 60).toFixed(1))
+        let estimatedPomodoros = this.getEstimatedPomodorosCount()
+        let completedPomodoros = this.getCompletedPomodorosCount()
+        
+        for(let i = 0; i < this.tasks.length; i++){
+            if(this.tasks[i].checked){
+                completedPomodoros -= this.tasks[i].completedPomodoros
+            }
+        }
+        const remainingPomodoros = estimatedPomodoros - completedPomodoros
+        const remainingTime = Number((remainingPomodoros * 25 / 60).toFixed(1))
         return remainingTime > 0 ? remainingTime : 0
     }
 }
