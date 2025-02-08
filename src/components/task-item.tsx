@@ -27,7 +27,7 @@ export function TaskItem({ id, title, selected, checked, number, total, onCheck,
 
   return (
     <Card className={`w-full rounded-md border-0
-      ${selected ? "border-l-8 border-blue-500" : "" }`}
+      ${selected ? "border-b-4 border-orange-500" : "" }`}
     onClick={handleSelect}>
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
