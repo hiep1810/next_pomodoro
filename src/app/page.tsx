@@ -175,7 +175,7 @@ export default function PomodoroTimer() {
 
       <main className="max-w-2xl mx-auto p-4">
         <div className="bg-[#ffffff]/10 rounded-lg p-5">
-          <Tabs defaultValue="pomodoro" onValueChange={handleModeChange} className="w-full">
+          <Tabs defaultValue="pomodoro" value={mode} onValueChange={handleModeChange} className="w-full">
             <TabsList className={`w-full ${theme.bg}`}>
               <TabsTrigger 
                 value="pomodoro" 
