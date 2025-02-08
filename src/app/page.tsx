@@ -67,6 +67,9 @@ export default function PomodoroTimer() {
 
   const handleAddTask = (title: string, estimatedPomodoros: number) => {
     const task = new Task(title, false, estimatedPomodoros, 0)
+    if (tasks.length === 0){
+      setSelectedTaskId(task.id)
+    }
     setTasks([...tasks, task])
   }
 
