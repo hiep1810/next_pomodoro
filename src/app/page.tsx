@@ -22,7 +22,7 @@ export default function PomodoroTimer() {
   const theme = themeMap[mode]
 
   const onTimeEnd = () => {
-    let selectedTask = tasks.find(task => task.id === selectedTaskId)
+    const selectedTask = tasks.find(task => task.id === selectedTaskId)
     if(mode === 'pomodoro'){
       setCompletedPomosCount(completedPomosCount + 1)
       if(selectedTask){

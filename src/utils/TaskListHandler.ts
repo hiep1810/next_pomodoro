@@ -35,9 +35,10 @@ export class TaskListHandler {
 
 
     public getFinishAt(): string {
-        let estimatedPomodoros = this.getEstimatedPomodorosCount()
+        const estimatedPomodoros = this.getEstimatedPomodorosCount()
         let completedPomodoros = this.getCompletedPomodorosCount()
         
+
         for(let i = 0; i < this.tasks.length; i++){
             if(this.tasks[i].checked){
                 completedPomodoros -= this.tasks[i].completedPomodoros
@@ -63,7 +64,7 @@ export class TaskListHandler {
     }
 
     public getRemainingTime(): number {
-        let estimatedPomodoros = this.getEstimatedPomodorosCount()
+        const estimatedPomodoros = this.getEstimatedPomodorosCount()
         let completedPomodoros = this.getCompletedPomodorosCount()
         
         for(let i = 0; i < this.tasks.length; i++){
