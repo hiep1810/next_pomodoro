@@ -35,18 +35,22 @@ export class TaskListHandler {
 
 
     public getFinishAt(): string {
-        const estimatedPomodoros = this.getEstimatedPomodorosCount()
-        let completedPomodoros = this.getCompletedPomodorosCount()
-        
+        let estimatedPomodoros = 0
+        let completedPomodoros = 0
 
         for(let i = 0; i < this.tasks.length; i++){
-            if(this.tasks[i].checked){
-                completedPomodoros -= this.tasks[i].completedPomodoros
+            if(!this.tasks[i].checked){
+                if(this.tasks[i].completedPomodoros < this.tasks[i].estimatedPomodoros){
+                    estimatedPomodoros += this.tasks[i].estimatedPomodoros
+                    completedPomodoros += this.tasks[i].completedPomodoros
+                }
             }
         }
         const remainingPomodoros = estimatedPomodoros - completedPomodoros
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
         
+
+
         if (remainingPomodoros > 0){
             const remainingTime = remainingPomodoros * 25
             const finishAt = new Date(Date.now() + remainingTime * 60 * 1000)
@@ -64,16 +68,20 @@ export class TaskListHandler {
     }
 
     public getRemainingTime(): number {
-        const estimatedPomodoros = this.getEstimatedPomodorosCount()
-        let completedPomodoros = this.getCompletedPomodorosCount()
-        
+        let estimatedPomodoros = 0
+        let completedPomodoros = 0
+
         for(let i = 0; i < this.tasks.length; i++){
-            if(this.tasks[i].checked){
-                completedPomodoros -= this.tasks[i].completedPomodoros
+            if(!this.tasks[i].checked){
+                if(this.tasks[i].completedPomodoros < this.tasks[i].estimatedPomodoros){
+                    estimatedPomodoros += this.tasks[i].estimatedPomodoros
+                    completedPomodoros += this.tasks[i].completedPomodoros
+                }
             }
         }
         const remainingPomodoros = estimatedPomodoros - completedPomodoros
         const remainingTime = Number((remainingPomodoros * 25 / 60).toFixed(1))
         return remainingTime > 0 ? remainingTime : 0
+
     }
 }
