@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard, Check, Trash2, Eye, List, Lock, FileText, SkipForward } from 'lucide-react'
+import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard, Check, Trash2, Eye, List, Lock, FileText, SkipForward, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePomodoro } from '@/hooks/use-pomodoro'
@@ -16,6 +16,8 @@ import { TaskForm } from '@/components/task-form'
 import { TaskItem } from '@/components/task-item'
 import { Task } from '@/models/Task'
 import { TaskListHandler } from '@/utils/TaskListHandler'
+import Report from '@/components/report-dashboard'
+
 
 export default function PomodoroTimer() {
   const [mode, setMode] = useState<PomodoroMode>('pomodoro')
@@ -43,6 +45,7 @@ export default function PomodoroTimer() {
   const [estimatedPomos, setEstimatedPomos] = useState(0)
   const [completedPomos, setCompletedPomos] = useState(0)
   const [completedPomosCount, setCompletedPomosCount] = useState(0)
+  const [showReport, setShowReport] = useState(false)
 
   useEffect(() => {
     const taskList = new TaskListHandler(tasks)
@@ -123,6 +126,22 @@ export default function PomodoroTimer() {
 
   return (
     <div className={`min-h-screen ${theme.bg}`}>
+      {showReport && (
+        <>
+          <div className="fixed inset-0 z-50 bg-black/50 overflow-y-auto">
+            <div className="min-h-screen flex items-center justify-center p-4">
+              <div className="bg-white rounded-lg w-[90vw] max-w-4xl">
+                <Report onClose={() => setShowReport(false)} />
+              </div>
+            </div>
+          </div>
+          <style jsx global>{`
+            body {
+              overflow: hidden;
+            }
+          `}</style>
+        </>
+      )}
       <header className="max-w-2xl mx-auto p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -132,7 +151,12 @@ export default function PomodoroTimer() {
             <span className="text-white font-bold text-2xl">Pomofocus</span>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}>
+            <Button variant="ghost" 
+              className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}
+              onClick={() => {
+                setShowReport(true)
+              }}
+            >
               <BarChart2 className="w-5 h-5" />
               <span className="ml-2 hidden sm:inline">Report</span>
             </Button>
