@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard, Check, Trash2, Eye, List, Lock, FileText, SkipForward, X } from 'lucide-react'
+import { Settings, BarChart2, MoreVertical, User, LogIn, Star, Keyboard, Check, Trash2, Eye, List, Lock, FileText, SkipForward} from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePomodoro } from '@/hooks/use-pomodoro'
@@ -127,20 +127,7 @@ export default function PomodoroTimer() {
   return (
     <div className={`min-h-screen ${theme.bg}`}>
       {showReport && (
-        <>
-          <div className="fixed inset-0 z-50 bg-black/50 overflow-y-auto">
-            <div className="min-h-screen flex items-center justify-center p-4">
-              <div className="bg-white rounded-lg w-[90vw] max-w-4xl">
-                <Report onClose={() => setShowReport(false)} />
-              </div>
-            </div>
-          </div>
-          <style jsx global>{`
-            body {
-              overflow: hidden;
-            }
-          `}</style>
-        </>
+        <Report onClose={() => setShowReport(false)} />
       )}
       <header className="max-w-2xl mx-auto p-4">
         <div className="flex items-center justify-between">
