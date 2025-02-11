@@ -234,7 +234,7 @@ export default function PomodoroTimer() {
                   onClick={handleSkipForward}
                 variant="ghost"
               >
-                <SkipForward className="w-6 h-6" />
+                <SkipForward className= {`w-6 h-6 ${!isRunning && 'hidden'}`} />
               </Button>
             </div>
           </div>
