@@ -17,7 +17,7 @@ import { TaskItem } from '@/components/task-item'
 import { Task } from '@/models/Task'
 import { TaskListHandler } from '@/utils/TaskListHandler'
 import Report from '@/components/report-dashboard'
-
+import SettingsModal from '@/components/settings-modal'
 
 export default function PomodoroTimer() {
   const [mode, setMode] = useState<PomodoroMode>('pomodoro')
@@ -46,6 +46,7 @@ export default function PomodoroTimer() {
   const [completedPomos, setCompletedPomos] = useState(0)
   const [completedPomosCount, setCompletedPomosCount] = useState(0)
   const [showReport, setShowReport] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
 
   useEffect(() => {
     const taskList = new TaskListHandler(tasks)
@@ -129,6 +130,9 @@ export default function PomodoroTimer() {
       {showReport && (
         <Report onClose={() => setShowReport(false)} />
       )}
+      {showSettings && (
+        <SettingsModal open={showSettings} onOpenChange={setShowSettings} />
+      )}
       <header className="max-w-2xl mx-auto p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -147,7 +151,11 @@ export default function PomodoroTimer() {
               <BarChart2 className="w-5 h-5" />
               <span className="ml-2 hidden sm:inline">Report</span>
             </Button>
-            <Button variant="ghost" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}>
+            <Button variant="ghost" className={`text-white bg-[#ffffff]/10 ${theme.textHover}`}
+              onClick={() => {
+                setShowSettings(true)
+              }}
+            >
               <Settings className="w-5 h-5" />
               <span className="ml-2 hidden sm:inline">Setting</span>
             </Button>
