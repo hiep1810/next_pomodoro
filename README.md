@@ -1,28 +1,56 @@
 # Pomofocus Clone
 
-Một ứng dụng quản lý thời gian theo phương pháp Pomodoro được xây dựng bằng Next.js và TypeScript.
+A Next.js application for managing tasks and tracking time using the Pomodoro Technique.
 
-## Tính năng
+## Features
 
-- ⏰ Hẹn giờ Pomodoro với 3 chế độ: Pomodoro (25 phút), Short Break (5 phút), Long Break (15 phút)
-- ✅ Quản lý danh sách công việc (tasks) với ước tính số pomodoro cần thiết
-- 📊 Báo cáo thống kê về thời gian làm việc
-- ⚙️ Tùy chỉnh cài đặt thời gian và giao diện
-- 🎨 Giao diện thay đổi màu sắc theo từng chế độ
-- 🔄 Tự động chuyển đổi giữa các chế độ
+-   **Task Management:** Add, edit, and delete tasks.
+-   **Pomodoro Timer:** Built-in Pomodoro timer to help you stay focused.
+-   **Customizable Settings:** Adjust Pomodoro duration, break duration, and more.
+-   **Task Completion Tracking:** Track the number of Pomodoros completed for each task.
+-   **User Interface:** A clean and intuitive user interface.
 
-## Công nghệ sử dụng
+## Technologies Used
 
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- Radix UI
-- Lucide Icons
-- Shadcn/ui
+-   **Next.js:** React framework for building performant web applications.
+-   **TypeScript:** Superset of JavaScript for type safety and improved developer experience.
+-   **Tailwind CSS:** Utility-first CSS framework for rapid UI development.
+-   **Radix UI:** Unstyled, accessible components for building high-quality user interfaces.
 
-## Cài đặt và Chạy
+## Getting Started
 
-1. Clone repository:
+1.  **Clone the repository:**
 
+    ```bash
+    git clone <repository-url>
+    ```
 
+2.  **Install dependencies:**
 
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+
+3.  **Run the development server:**
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request.
+
+## License
+
+[MIT](https://opensource.org/license/mit/)
