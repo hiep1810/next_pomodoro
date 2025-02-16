@@ -1,26 +1,24 @@
 import { Clock, Calendar, Flame, X } from "lucide-react"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card } from "@/components/ui/card"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
-export default function ReportDashboard({ onClose }: { onClose: () => void }) {
+interface ReportDashboardModalProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}
+
+export default function ReportDashboardModal({ open, onOpenChange }: ReportDashboardModalProps) {
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 overflow-y-auto">
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="relative bg-white rounded-lg w-[90vw] max-w-4xl">
-        <Button
-              variant="ghost"
-              className="absolute right-2 top-2 hover:bg-gray-100"
-              onClick={onClose}
-            >
-              <X className="h-6 w-6 text-gray-500" />
-            </Button>
-          <div className="max-w-3xl mx-auto p-6">
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-xl">
+      <DialogHeader>
+          <DialogTitle>REPORT</DialogTitle>
+        </DialogHeader>
 
-            {/* Top Navigation */}
-
-
-            <Tabs defaultValue="summary" className="w-full pt-8">
+        <div className="space-y-8">
+            <Tabs defaultValue="summary" className="w-full">
               <TabsList className="w-full bg-rose-100/50">
                 <TabsTrigger value="summary" className="flex-1 data-[state=active]:bg-rose-200">
                   Summary
@@ -135,9 +133,8 @@ export default function ReportDashboard({ onClose }: { onClose: () => void }) {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }
 

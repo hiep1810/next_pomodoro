@@ -16,8 +16,8 @@ import { TaskForm } from '@/components/task-form'
 import { TaskItem } from '@/components/task-item'
 import { Task } from '@/models/Task'
 import { TaskListHandler } from '@/utils/TaskListHandler'
-import Report from '@/components/report-dashboard'
-import SettingsModal from '@/components/settings-modal'
+import ReportDashboardModal from '@/components/modals/report-dashboard-modal'
+import SettingsModal from '@/components/modals/settings-modal'
 
 export default function PomodoroTimer() {
   const [mode, setMode] = useState<PomodoroMode>('pomodoro')
@@ -128,7 +128,7 @@ export default function PomodoroTimer() {
   return (
     <div className={`min-h-screen ${theme.bg}`}>
       {showReport && (
-        <Report onClose={() => setShowReport(false)} />
+        <ReportDashboardModal open={showReport} onOpenChange={setShowReport} />
       )}
       {showSettings && (
         <SettingsModal open={showSettings} onOpenChange={setShowSettings} />
@@ -237,12 +237,12 @@ export default function PomodoroTimer() {
               </Button>
               <Button
                 className={`hover:bg-white/10 ml-60 text-white hover:text-white
-                    absolute
+                    absolute ${!isRunning && 'hidden'}
                   `}
                   onClick={handleSkipForward}
                 variant="ghost"
               >
-                <SkipForward className= {`w-6 h-6 ${!isRunning && 'hidden'}`} />
+                <SkipForward className= {`w-6 h-6`} />
               </Button>
             </div>
           </div>
